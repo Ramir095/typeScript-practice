@@ -5,9 +5,7 @@ import { Usuario, ReqResListado } from '../interfaces/reqRes';
 export const useUsuarios = () => {
 
   const [usuarios, setUsuarios] = useState<Usuario[]>([]); //  Le pasamos la interface correspondiente USUARIO
-  const paginaRef = useRef(1); // El useRef es igual al useState pero no vuelve a recargar la pagina. Lo usamos porque en este caso no necesitamos volver a cargar el html, solo necesitamos cambiar los valores
-  console.log(paginaRef.current);
-  
+  const paginaRef = useRef(1); // El useRef es igual al useState pero no vuelve a recargar la pagina. Lo usamos porque en este caso no necesitamos volver a cargar el html, solo necesitamos cambiar los valores  
 
   useEffect(() => {
     // llamado al API
@@ -25,7 +23,7 @@ export const useUsuarios = () => {
     if( resp.data.data.length > 0 ){
       setUsuarios( resp.data.data );
     } else {
-      paginaRef.current--;
+      paginaRef.current--; // cuando avancemos a una pagina que no exista (como la pagina 3) esto bajará el número
       alert('No hay registros');
     };
   };  

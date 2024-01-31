@@ -6,7 +6,7 @@ export const Usuarios = () => {
   // Si bien recibe el objeto completo como atributo (usuario) podemos desestructurar en el mismo lugar
   const renderItem = ({ id, email, first_name, last_name, avatar }: Usuario ) => {
     return (
-      <tr key={ id.toString() }>
+      <tr key={ id.toString() }> {/* Es recomendable que el id sea un string */}
         <td>
           <img 
             style={{
@@ -35,7 +35,7 @@ export const Usuarios = () => {
         </thead>
         <tbody>
           {
-            usuarios.map(renderItem)
+            usuarios.map(renderItem) // Cuando mandamos la unica propiedad como referencia no es necesario aclararlo
           }
         </tbody>
       </table>

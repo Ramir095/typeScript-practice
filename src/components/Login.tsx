@@ -14,12 +14,12 @@ const initialState: AuthState = {
   nombre: ''
 };
 
+// Usamos types para las acciones ya que será un objeto plano, que no voy a expandir a diferencia de las interfaces
 type LoginPayload = {
   username: string,
   nombre: string
 }
 
-// Usamos type para las acciones ya que será un objeto plano, que no voy a expandir a diferencia de las interfaces
 type AuthAction = 
   | { type: 'logout' }
   | { type: 'login', payload: LoginPayload }
@@ -48,14 +48,14 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 
 export const Login = () => {
 
-  // Como primer parametro se recibe el state pero como dentro del state hay una prop llamada "validando", lo podemos desestructurar
+  // Como primer parametro se recibe el state podemos desestructurar las propiedades del estado
   const [{ validando, token, nombre }, dispatch] = useReducer(authReducer, initialState)
 
   useEffect(() => {
     setTimeout(() => {
       dispatch({ type: 'logout' });
     }, 1500);
-  }, []);
+  }, []); // En 1.5 segundos se despachará el action con el type: 'logout'
 
   const login = () => {
     dispatch({
@@ -73,7 +73,7 @@ export const Login = () => {
     })
   };
 
-  if( validando ){
+  if( validando ){ // Este codigo se ejecuta cuando la propiedad validando esta en true. Luego de 1,5 segundos cambia al otro codigo
     return (
       <>
         <h3>Login</h3>
